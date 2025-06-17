@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dawinson Maina - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background: #121212;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #2a2a72, #009ffd);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      padding: 1.5rem 1rem;
+      margin: 0 auto;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      height: 64px;
+      background: rgba(18, 18, 18, 0.65);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      z-index: 100;
+      border-bottom: 1px solid #222;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      letter-spacing: 0.12em;
+      color: #80deea;
+      user-select: none;
+      cursor: default;
+      text-transform: uppercase;
+    }
+
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #e0e0e0;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      padding: 0.25rem 0;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background: #80deea;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: #80deea;
+      outline: none;
+    }
+
+    nav a:hover::after,
+    nav a:focus-visible::after {
+      width: 100%;
+    }
+
+    /* Main content */
+    main {
+      flex-grow: 1;
+      padding: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Hero Section */
+    #hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 1rem;
+      gap: 1.25rem;
+    }
+
+    #hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #80deea, #00bcd4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+    }
+
+    #hero p {
+      max-width: 600px;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #b0bec5;
+      line-height: 1.5;
+      user-select: none;
+    }
+
+    #hero .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.75rem;
+    }
+    #hero .social-links a {
+      background: rgba(0, 188, 212, 0.85);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      transition: background-color 0.3s ease;
+    }
+    #hero .social-links a:hover,
+    #hero .social-links a:focus-visible {
+      background: #007c91;
+      outline: none;
+    }
+
+    /* Section Titles */
+    section h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      position: relative;
+      max-width: max-content;
+      padding-bottom: 0.5rem;
+      color: #80deea;
+      user-select: none;
+    }
+    section h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40%;
+      height: 3px;
+      background: linear-gradient(135deg, #80deea, #00bcd4);
+      border-radius: 2px;
+    }
+
+    /* Cards container */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 24px;
+    }
+
+    /* Card styles */
+    .card {
+      background: rgba(18, 18, 18, 0.6);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow:
+        0 4px 10px rgba(0, 188, 212, 0.15),
+        inset 0 0 8px rgba(0, 188, 212, 0.3);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s cubic-bezier(.22,.61,.36,1), box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      color: #b0bec5;
+    }
+    .card:hover,
+    .card:focus-within {
+      transform: translateY(-8px);
+      box-shadow:
+        0 12px 30px rgba(0, 188, 212, 0.45),
+        inset 0 0 20px rgba(0, 188, 212, 0.5);
+      outline: none;
+    }
+
+    .card h3 {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #00bcd4;
+      user-select: none;
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    /* Project link */
+    .project-link {
+      margin-top: auto;
+      align-self: flex-start;
+      display: inline-flex;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      color: #80deea;
+      transition: color 0.3s ease;
+      align-items: center;
+    }
+    .project-link .material-icons {
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+    .project-link:hover,
+    .project-link:focus-visible {
+      color: #00bcd4;
+      outline: none;
+    }
+    .project-link:hover .material-icons,
+    .project-link:focus-visible .material-icons {
+      transform: translateX(4px);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(18, 18, 18, 0.8);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid #222;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #607d8b;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    footer a {
+      color: #80deea;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    footer a:hover,
+    footer a:focus-visible {
+      color: #00bcd4;
+      outline: none;
+    }
+
+    /* Responsive typography fluid scaling */
+    @media (max-width: 600px) {
+      nav {
+        gap: 16px;
+      }
+      main {
+        padding: 1rem 1rem 2rem;
+      }
+      #hero p {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <div class="logo" aria-label="Brand Logo: Dawinson Maina">Dawinson Maina</div>
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="#hero" tabindex="0">Home</a>
+      <a href="#about" tabindex="0">About</a>
+      <a href="#projects" tabindex="0">Projects</a>
+      <a href="#contact" tabindex="0">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" aria-label="Introduction and social links">
+      <h1>I&apos;m Dawinson Maina</h1>
+      <p>Business Information Technology student passionate about IT support and software development. Proactive learner, enthusiastic about technology and innovation. Experienced in Python, networking, troubleshooting, and data security.</p>
+      <div class="social-links" aria-label="Social media and developer profiles">
+        <a href="https://github.com/Miasma01" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+          <span class="material-icons" aria-hidden="true">code</span>
+        </a>
+        <a href="https://www.linkedin.com/in/dawinson-maina" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+          <span class="material-icons" aria-hidden="true">person</span>
+        </a>
+        <a href="mailto:dawinson435@gmail.com" aria-label="Send an email">
+          <span class="material-icons" aria-hidden="true">email</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="about" aria-label="About me section">
+      <h2>About Me</h2>
+      <p>I am a Diploma student in Business Information Technology, currently studying at The Cooperative University of Kenya. I have a strong foundation in IT, specializing in networking, basic programming with Python, data security, and troubleshooting. I am seeking an IT support or development role where I can contribute technical skills and continually grow professionally.</p>
+    </section>
+
+    <section id="projects" aria-label="Projects and portfolio">
+      <h2>Projects</h2>
+      <div class="cards">
+        <article class="card" tabindex="0" aria-labelledby="proj1title" role="region" aria-describedby="proj1desc">
+          <h3 id="proj1title">Python Port Scanner</h3>
+          <p id="proj1desc">A fast and efficient multi-threaded port scanner built with Python. Scans a range of ports on specified hosts with timeout management.</p>
+          <a href="https://github.com/Miasma01/port_scanner" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Python Port Scanner on GitHub">
+            <span>View on GitHub</span>
+            <span class="material-icons" aria-hidden="true">open_in_new</span>
+          </a>
+        </article>
+        <article class="card" tabindex="0" aria-labelledby="proj2title" role="region" aria-describedby="proj2desc">
+          <h3 id="proj2title">Network Security Tools</h3>
+          <p id="proj2desc">A collection of scripts and tools focused on analyzing and enhancing network security, including vulnerability scanning and monitoring.</p>
+          <a href="https://github.com/Miasma01/network-security-tools" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Network Security Tools on GitHub">
+            <span>View on GitHub</span>
+            <span class="material-icons" aria-hidden="true">open_in_new</span>
+          </a>
+        </article>
+        <article class="card" tabindex="0" aria-labelledby="proj3title" role="region" aria-describedby="proj3desc">
+          <h3 id="proj3title">Web Development Samples</h3>
+          <p id="proj3desc">Various mini web projects demonstrating responsive layouts, UI/UX best practices, and modern frontend development techniques.</p>
+          <a href="https://github.com/Miasma01/web-samples" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Web Development Samples on GitHub">
+            <span>View on GitHub</span>
+            <span class="material-icons" aria-hidden="true">open_in_new</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" aria-label="Contact information and form">
+      <h2>Contact Me</h2>
+      <p>If you'd like to get in touch for collaboration or opportunities, feel free to reach out via email below.</p>
+      <address>
+        <strong>Email: </strong><a href="mailto:dawinson435@gmail.com" aria-label="Send email to Dawinson Maina">dawinson435@gmail.com</a><br />
+        <strong>Phone: </strong><a href="tel:+254790639461" aria-label="Call Dawinson Maina">+254 790 639 461</a>
+      </address>
+    </section>
+  </main>
+
+  <footer>
+    <div>&copy; 2024 Dawinson Maina</div>
+    <div>
+      <a href="https://github.com/Miasma01" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">GitHub</a> |
+      <a href="https://www.linkedin.com/in/dawinson-maina" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>
